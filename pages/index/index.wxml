@@ -1,0 +1,131 @@
+<view class='nav'>
+    <view class='item {{navcur == index ? "cur" : ""}}'
+    	wx:for="{{nav}}"
+    	bindtap="navtab"
+    	data-navindex="{{index}}"
+    >{{item}}</view>
+</view>
+
+<!--推荐  -->
+<view class='tuijian' hidden="{{navcur !== 0}}">
+   <view class="banner">
+    <swiper indicator-dots="{{true}}"
+        circular="{{true}}"
+        autoplay="{{true}}"
+        interval="2000">
+      <swiper-item wx:for="{{slider}}"><image src="{{item.picUrl}}"></image></swiper-item>
+    </swiper>
+  </view>
+  <view class="content">
+     <view class="diantai">
+        <view class="title">
+          <text>电台</text>   
+        </view>
+        <view class="box">
+            <view class="box1" wx:for="{{radioList}}">
+              <image src="{{item.picUrl}}"></image>
+              <text>{{item.Ftitle}}</text>
+            </view>
+        </view>
+      </view>
+      <view class="title">
+          <text>热门歌单</text>   
+      </view>
+      <view class="content1">
+        <view class="box">
+            <view class="box1" wx:for="{{songList}}">
+              <image src="{{item.picUrl}}"></image>
+              <text>{{item.songListDesc}}</text>
+            </view>
+        </view>
+      </view>
+      
+  </view>
+</view>
+
+<!--排行榜  -->
+<view class='toplist' hidden="{{navcur !== 1}}">
+  <view class='item' wx:for="{{topList}}" bindtap='opentopList' data-id="{{item.id}}">    
+    <image class='face' src='{{item.picUrl}}'></image>
+    <view class='main'>
+      <view class='title text-hide'>{{item.topTitle}}</view>
+      <view class='song-list text-hide' wx:for="{{item.songList}}">
+        <text class='text'>{{index+1}}</text>
+        <text class='song-name'>{{item.songname}}</text>
+        <text class='song-author text'>-{{item.singername}}</text>
+      </view>
+    </view>
+    <view class='arrow'></view>
+  </view>
+</view>
+
+<!-- 搜索 -->
+<view class="page3 search" hidden="{{navcur !== 2}}">
+  <!-- 搜索框-->
+  <view class="search-bar">
+    <view class="search-wrap">
+      <view class="search-box">
+        <icon class="icon-search" type="search" size="14"></icon>
+        <input type="text" class="search-input" placeholder="搜索歌曲、歌单、专辑"  
+          bindinput="onSearchInput"
+          value="{{searchVal}}"
+          bindfocus="onSearchFocus" bindconfirm="onSearchConfirm" />
+          
+        <!-- <view class="icon-clear">
+          <icon type="clear" hidden="{{!SearchFocus}}" size="20" catchtap="onClearInput"></icon>
+        </view> -->
+      </view>
+    </view>
+    <view class="cancel-btn" bindtap="onSearchCancel" hidden="{{!SearchFocus}}">取消</view>
+  </view>
+
+  <!-- 热门搜索  1.获取焦点隐藏  -->
+  <view class="search-hot" hidden="{{SearchFocus}}">
+    <text class="hot_search" style="color:#9b9a9d">热门搜索</text>
+    <view class="search_record">
+      <view class="search_name">
+        <text>{{special_key}}</text>
+      </view>      
+      <view class="search_name" wx:for="{{search_list}}" data-hotSearchid='{{index}} ' bindtap='keyToplay'>
+        <text>{{item.k}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 搜索历史  1.获取焦点显示出来  2.有了搜索结果就隐藏-->
+  <view class="search-history" hidden="{{searchRsult.length || !SearchFocus}}">
+    <view class="search-record">
+     
+        <view class="record-item" wx:for="{{storeList}}">
+          <icon class="icon-time" color="#D7D7D7" type="waiting_circle" size="20"></icon>
+          <view class="record_con">{{item}}</view>
+          <!--<icon class="icon-close" type="clear" size="15" ></icon>-->
+        </view>
+      <view class="record_handle" bindtap='removelist'>
+        <text>清除搜索记录</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 搜索结果  1. 只要有结果就显示出来 -->
+  <view class="search-result" hidden="{{!searchRsult.length}}">
+
+      <view class="result-item"  wx:for="{{searchRsult}}" data-searchid='{{index}}' bindtap='searchToplay'>
+        <view class="icon"></view>
+        <text class="title">{{item.songname}}</text>
+        <view class="subtitle">
+          <text><!-- 单曲： -->{{item.singer[0].name}}</text>
+          <!-- <text>专辑：2222</text> -->
+        </view>
+      </view>
+      <view id="scrollTop" class="result-item">
+        <view class="icon"></view>
+        <text class="title">名称</text>
+        <view class="subtitle">
+          <text >{{33333}}</text>
+        </view>
+      </view>
+
+  </view>
+
+</view>

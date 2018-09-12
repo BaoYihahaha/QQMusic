@@ -1,0 +1,23 @@
+<view class="top" >
+  <view class='blur' style='background:url("{{topinfo.pic_album}}") no-repeat;background-size: cover;'></view>
+  <view class='main'>
+    <image src='{{topinfo.pic_album}}'></image>
+    <view class='right'>
+      <view class='title'>{{topinfo.ListName}}</view>
+      <view class='day'>第{{day_of_year}}天</view>
+      <view class='time'>{{date}} 更新</view>
+    </view>
+  </view>
+  <view class='iconfont {{flag? "icon-bofang" : "icon-bofang1"}} play' bindtap='playEvent'></view>
+  <button class='btn' bindtap='playsong'>立即播放</button>
+</view>
+<view class='content'>
+  <view class='title'>排行榜  共{{num}}首</view>
+  <view class='item' wx:for="{{songlist}}" bindtap='opendetail' data-id='{{index}}'>
+    <view class='left'>{{index+1}}</view>
+    <view class='right text-hide'>
+      <view class='song-name text-hide'>{{item.data.songname}}</view>
+      <text class='song-author text-hide' wx:for-item="itemName" wx:for="{{item.data.singer}}">{{index == 0 ? '' : '/'}}{{itemName.name}}{{index >= 1 ? '●':''}}{{item.data.albumdesc}}</text>
+    </view>
+  </view>
+</view>

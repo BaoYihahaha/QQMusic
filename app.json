@@ -1,0 +1,14 @@
+{
+  "pages":[  
+    "pages/index/index", 
+    "pages/playsong/playsong",
+    "pages/topList/topList"
+    
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#31c27c",
+    "navigationBarTitleText": "QQMusic",
+    "navigationBarTextStyle":"white"
+  }
+}

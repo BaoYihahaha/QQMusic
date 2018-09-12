@@ -1,0 +1,29 @@
+<view class='song-page'>
+  <view class='blur' style='background:url("https://y.gtimg.cn/music/photo_new/T002R300x300M0000004stlO2ryr7t.jpg?max_age=2592000") no-repeat;background-size: cover;'></view>
+  
+  <view class='content'>
+    <view class='header'>
+      <view class='song-name'>{{songname}}</view>     
+      <text class='singer' wx:for="{{singer}}">{{index == 0 ? '' : '/'}}{{item.name}}{{index >= 1 ? '●':''}}</text><text>{{song.albumdesc}}</text>         
+    </view>
+    <scroll-view class='scroll' scroll-y>
+      <view class='text' hidden='{{!islyric}}' wx:for="{{lyricList}}">{{item}}</view>
+      <view class='text' hidden='{{islyric}}'>暂无歌词……</view>
+    </scroll-view>
+    <view class='footer'>
+      <view class='progress-bar'>
+        <view class='start time'>{{durationM<=9?"0":"1"}}{{currentPositionM}}:{{currentPositionS<=9?"0":""}}{{currentPositionS}}</view>
+        <view class='bar-father' bindtouchmove="barMove">       
+          <view class='bar' style='width:{{width}}rpx;' ></view>  
+        </view>
+        
+        <view class='end time'>{{durationM<=9?"0":""}}{{durationM}}:{{durationS<=9?"0":""}}{{durationS}}</view>
+      </view>
+      <view class='play-box'>
+        <view class='iconfont icon-previous' bindtap='prev'></view> 
+        <view class='iconfont {{flag? "icon-bofang" : "icon-bofang1"}} play' bindtap='playEvent'></view> 
+        <view class='iconfont icon-next' bindtap='next'></view> 
+      </view> 
+    </view>
+  </view>
+</view>
